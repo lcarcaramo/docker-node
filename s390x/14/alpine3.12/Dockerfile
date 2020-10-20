@@ -1,4 +1,4 @@
-FROM quay.io/ibmz/alpine:3.11
+FROM quay.io/ibmz/alpine:3.12
 
 ENV NODE_VERSION 14.14.0
 
