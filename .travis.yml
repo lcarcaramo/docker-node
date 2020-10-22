@@ -1,6 +1,20 @@
 arch: s390x
 services:
   - docker
-script:
-  - chmod +x s390x/14/alpine3.12/docker-entrypoint.sh
-  - docker login quay.io -u $ROBOT -p $ROBOT_TOKEN && docker build s390x/14/alpine3.12 --tag quay.io/ibmz/node:14.14.0 && docker push quay.io/ibmz/node
+env:
+  global:
+    - TEST_DIR="$PWD/s390x/test/14/alpine3.12"
+    - TEST_SCRIPT="test.sh"
+    - BUILD_DIR="$PWD/s390x/14/alpine3.12"
+    - ENTRYPOINT_SCRIPT="$BUILD_DIR/docker-entrypoint.sh"
+    - REPO="quay.io/ibmz/node"
+    - TAG="$REPO:14.14.0"
+before_script: 
+  - chmod +x $ENTRYPOINT_SCRIPT
+  - cd $TEST_DIR && chmod +x $TEST_SCRIPT
+  - docker login quay.io -u $ROBOT -p $ROBOT_TOKEN
+script: 
+  - docker build $BUILD_DIR --tag $TAG
+  - cd $TEST_DIR && bash $TEST_SCRIPT 
+after_script:
+  - docker push $REPO
