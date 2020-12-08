@@ -1,8 +1,10 @@
 ## Tags
-> _Built from [`quay.io/ibmz/alpine:3.12`](https://quay.io/repository/ibmz/alpine?tab=info)_
--	[`14.14.0`](https://github.com/lcarcaramo/docker-node/blob/master/s390x/14/alpine3.12/Dockerfile) - [![Build Status](https://travis-ci.com/lcarcaramo/docker-node.svg?branch=master)](https://travis-ci.com/lcarcaramo/docker-node)
+> _Built from [`quay.io/ibm/alpine:3.12`](https://quay.io/repository/ibm/alpine?tab=info)_
+-	`14.14.0` - [![Build Status](https://travis-ci.com/lcarcaramo/docker-node.svg?branch=master)](https://travis-ci.com/lcarcaramo/docker-node)
 
-## What is Node.js?
+### __[Original Source Code](https://github.com/nodejs/docker-node)__
+
+## Node.js
 
 Node.js is a platform built on Chrome's JavaScript runtime for easily building
 fast, scalable network applications. Node.js uses an event-driven, non-blocking
@@ -16,7 +18,7 @@ See: http://nodejs.org
 ### Create a `Dockerfile` in your Node.js app project
 
 ```dockerfile
-FROM quay.io/ibmz/node:14.14.0
+FROM quay.io/ibm/node:14.14.0
 
 COPY . /home/node/app
 WORKDIR /home/node/app
@@ -50,7 +52,7 @@ If you create your own `Dockerfile` which inherits from the `node` image you can
 simply use `ENV` to override `NPM_CONFIG_LOGLEVEL`.
 
 ```dockerfile
-FROM quay.io/ibmz/node:14.14.0
+FROM quay.io/ibm/node:14.14.0
 ENV NPM_CONFIG_LOGLEVEL info
 ...
 ```
@@ -61,7 +63,7 @@ If you run the node image using `docker run` you can use the `-e` flag to
 override `NPM_CONFIG_LOGLEVEL`.
 
 ```console
-$ docker run -e NPM_CONFIG_LOGLEVEL=info node ...
+$ docker run -e NPM_CONFIG_LOGLEVEL=info quay.io/ibm/node:14.14.0 ...
 ```
 
 #### NPM run
@@ -70,7 +72,7 @@ If you are running npm commands you can use `--loglevel` to control the
 verbosity of the output.
 
 ```console
-$ docker run node npm --loglevel=warn ...
+$ docker run quay.io/ibm/node:14.14.0 npm --loglevel=warn ...
 ```
 
 ## License
